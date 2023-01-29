@@ -56,15 +56,22 @@ x_train_bin = np.array(x_train_small > THRESHOLD, dtype=np.float32)
 x_test_bin = np.array(x_test_small > THRESHOLD, dtype=np.float32)
 
 # create dataset we need
-for i in range(len(x_test_bin)):
-    x_test_bin[i].reshape(4, 4)
-    value = x_test_bin[i].tolist()
+# for i in range(len(x_test_bin)):
+#     x_test_bin[i].reshape(4, 4)
+#     value = x_test_bin[i].tolist()
 
-    image = {"image": value, "category": int(y_test[i])}
-    with open('hack2/data{}.json'.format(i), "a") as outfile:
-        json.dump(image, outfile)
+#     image = {"image": value, "category": int(y_test[i])}
+#     with open('hack2/data{}.json'.format(i), "a") as outfile:
+#         json.dump(image, outfile)
 
-
+# load the dataset we need
+dataset = []
+for i in range(len(images)):
+    dic = {}
+    dic["image"] = images[i]
+    dic["category"] = labels[i]
+    dataset.append(dic)
+        
 
 def count_gates(circuit: cirq.Circuit):
     """Returns the number of 1-qubit gates, number of 2-qubit gates, number of 3-qubit gates...."""
@@ -145,16 +152,10 @@ gatecount = 0
 
 for data in dataset:
     # encode image into circuit
-    with open('hack2' + '/' + str(data), 'r') as f:
-        data1 = json.load(f)
-
     circuit, image_re = run_part1(data1['image'])
 
     # count the number of 2qubit gates used
     gatecount += count_gates(circuit)[2]
-
-    data1['image'] = np.array(data1['image']).reshape(4, 4)
-    image_re.reshape(4, 4)
 
     # calculate mse
     mse += image_mse(data1['image'], image_re)
