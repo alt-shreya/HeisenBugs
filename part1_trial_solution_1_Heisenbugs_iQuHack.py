@@ -1,3 +1,6 @@
+teamname = 'Heisen_bugs'
+task = 'part 1'
+
 import os
 import qiskit
 from qiskit import quantum_info
