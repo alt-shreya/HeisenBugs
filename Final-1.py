@@ -118,7 +118,7 @@ def run_part1(image):
 def run_part2(image):
 
     #loade the quantum classifier circuit
-    classifier=qiskit.QuantumCircuit.from_qasm_file('quantum_classifier.qasm')
+    classifier=qiskit.QuantumCircuit.from_qasm_file('quantum_classifier.pickle')
     
     #encode image into circuit
     circuit=encode(image)
