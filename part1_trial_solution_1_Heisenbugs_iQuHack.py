@@ -46,12 +46,6 @@ images = images/255
 x_train_small = tf.image.resize(x_train, (4, 4)).numpy()
 x_test_small = tf.image.resize(x_test, (4, 4)).numpy()
 
-
-# replace 4,4 with 8,8 or higher for better score
-x_train_small = tf.image.resize(x_train, (4,4)).numpy()
-x_test_small = tf.image.resize(x_test, (4,4)).numpy()
-
-
 # check if data passes threshold or not
 THRESHOLD = 0.5
 
